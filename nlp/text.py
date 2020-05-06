@@ -72,7 +72,7 @@ class Text:
 
     def lexical_diversity(self):
         """ Calculates the lexical diversity of the given text. """
-        return len(self.unique) / len(self.text)
+        return len(self.unique) / len(self.body)
 
     def __repr__(self):
         return (f"Summary:\n  count: {self.count}\n  " +
@@ -81,4 +81,5 @@ class Text:
 
 
 t = Text("I am Alex, and You? How are You?")
+print(t.body)
 print(t)
