@@ -1,5 +1,6 @@
 from typing import List
 from collections import Counter
+from itertools import islice
 import re
 import string
 
@@ -21,7 +22,7 @@ class Text:
 
     def find(self, word: str, n: int = None) -> List[int]:
         """
-        Returns indexes (or first n indexes if n is specified) of a given word in text.
+        Return indexes (or first n indexes if n is specified) of a given word in text.
 
         Parameters:
         -----------
@@ -41,7 +42,7 @@ class Text:
 
     def concordance(self, word: str, size: int, ret: bool = 0) -> List[str]:
         """"
-        Returns all occurrences of a given word with given amount of additionals words from left and right side.
+        Return all occurrences of a given word with given amount of additionals words from left and right side.
 
         Parameters:
         -----------
@@ -64,11 +65,15 @@ class Text:
 
     def count_occur(self):
         """
-        Returns Counter object that count number of occurrences for every word in the text.
+        Return Counter object that count number of occurrences for every word in the text.
         """
         cleaned_text = self.text.translate(str.maketrans('', '', string.punctuation))
         cleaned_text = re.split("\s+", cleaned_text)
         return Counter(cleaned_text)
+    
+    def most_common(self, n: int = 10):
+        """ Return n most common items from the text. """
+        return self.count.most_common(n)
 
     def lexical_diversity(self):
         """ Calculates the lexical diversity of the given text. """
@@ -82,4 +87,4 @@ class Text:
 
 t = Text("I am Alex, and You? How are You?")
 print(t.body)
-print(t)
+print(t.most_common(2))
