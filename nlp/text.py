@@ -1,5 +1,7 @@
 from typing import List
+from collections import Counter
 import re
+import string
 
 
 class Text:
@@ -14,6 +16,8 @@ class Text:
     def __init__(self, text: str) -> None:
         self.body = re.split("\s+", text)
         self.text = text
+        self.unique = set(self.body)
+        self.count = self.count_occur()
 
     def find(self, word: str, n: int = None) -> List[int]:
         """
@@ -58,7 +62,13 @@ class Text:
             for occur in occurs:
                 print(occur)
 
+    def count_occur(self):
+        cleaned_text = self.text.translate(str.maketrans('', '', string.punctuation))
+        cleaned_text = re.split("\s+", cleaned_text)
+        return Counter(cleaned_text)
 
-t = Text("My name is Alex. Hope you have a good day. Alex, Alex")
-t.concordance("Alex", 2)
 
+
+t = Text("My name is Alex. Hope you have a good day. Alex, Alex. I hate you Alex")
+print(t.count)
+#t.concordance("Alex", 1, 1)
