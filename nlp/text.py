@@ -63,12 +63,22 @@ class Text:
                 print(occur)
 
     def count_occur(self):
+        """
+        Returns Counter object that count number of occurrences for every word in the text.
+        """
         cleaned_text = self.text.translate(str.maketrans('', '', string.punctuation))
         cleaned_text = re.split("\s+", cleaned_text)
         return Counter(cleaned_text)
 
+    def lexical_diversity(self):
+        """ Calculates the lexical diversity of the given text. """
+        return len(self.unique) / len(self.text)
+
+    def __repr__(self):
+        return (f"Summary:\n  count: {self.count}\n  " +
+                f"lexical diversity: {self.lexical_diversity()}\n  ")
 
 
-t = Text("My name is Alex. Hope you have a good day. Alex, Alex. I hate you Alex")
-print(t.count)
-#t.concordance("Alex", 1, 1)
+
+t = Text("I am Alex, and You? How are You?")
+print(t)
