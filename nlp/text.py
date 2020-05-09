@@ -79,12 +79,20 @@ class Text:
         """ Calculates the lexical diversity of the given text. """
         return len(self.unique) / len(self.body)
 
+    
+    def bigrams(self):
+        """ Return a list of bigram made of text. """
+        bigram = [(self.body[i-1], self.body[i]) for i in range(1, len(self.body))]
+        return bigram
+    
+    
     def __repr__(self):
-        return (f"Summary:\n  count: {self.count}\n  " +
+        return (f"Summary:\n  10 most common: {self.most_common(10)}\n  " +
                 f"lexical diversity: {self.lexical_diversity()}\n  ")
 
 
 
-t = Text("I am Alex, and You? How are You?")
-print(t.body)
-print(t.most_common(2))
+
+t = Text("The best performance can bring in sky high success.")
+bigrams = t.bigrams()
+print(bigrams)
