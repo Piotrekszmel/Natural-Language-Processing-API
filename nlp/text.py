@@ -54,7 +54,7 @@ class Text:
         """
 
         idxs = self.find(word)
-        
+        idxs = [idx if idx - size >= 0 else 0 for idx in idxs]
         occurs = [self.body[index - size:index] + self.body[index:index + size + 1] for index in idxs]
         
         if ret:
@@ -94,5 +94,4 @@ class Text:
 
 
 t = Text("The best performance can bring in sky high success.")
-bigrams = t.bigrams()
-print(bigrams)
+t.concordance("best", 2)
