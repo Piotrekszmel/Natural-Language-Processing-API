@@ -75,17 +75,26 @@ class Text:
         """ Return n most common items from the text. """
         return self.count.most_common(n)
 
-    def lexical_diversity(self):
+    def lexical_diversity(self) -> float:
         """ Calculates the lexical diversity of the given text. """
         return len(self.unique) / len(self.body)
 
     
-    def bigrams(self):
+    def bigrams(self) -> List:
         """ Return a list of bigram made of text. """
         bigram = [(self.body[i-1], self.body[i]) for i in range(1, len(self.body))]
         return bigram
     
-    
+    def lower(self) -> List:
+        """ Lower all words from bodfy and returns them. """
+        lower_text = [w.lower() for w in self.body]
+        return lower_text
+
+    def upper(self) -> List:
+        """ Upper all words from body and returns them. """
+        upper_text = [w.upper() for w in self.body]
+        return upper_text
+
     def __repr__(self):
         return (f"Summary:\n  10 most common: {self.most_common(10)}\n  " +
                 f"lexical diversity: {self.lexical_diversity()}\n  ")
@@ -94,4 +103,9 @@ class Text:
 
 
 t = Text("The best performance can bring in sky high success.")
-t.concordance("best", 2)
+low_text = t.lower()
+upp_text = t.upper()
+print(low_text)
+print("\n", upp_text)
+print("\n")
+print(t.body)
