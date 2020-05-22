@@ -1,29 +1,37 @@
-from typing import List
+from typing import List, Dict
 import re
 
 
 class Tokenizer:
-    def __init__(self):
+    def __init__(self) -> None:
         self.tokens = []
         self.word2idx = {}
 
     def word_tokenize(self, sent: str) -> List:
         s = re.sub('([.,!?()#])', r' \1 ', sent)
         s = re.sub('\s{2,}', ' ', s)
-        self.tokens = re.split("\s+", s)
-        return self.tokens
-    
-    def create_word2idx(self):
+        if len(self.tokens) == 0:
+            self.tokens = re.split("\s+", s)[:-1]
+            return self.tokens
+
+    def create_word2idx(self) -> Dict:
         assert len(self.tokens) > 0, "First create tokens"
-        self.word2idx = {k: v for (k, v) in enumerate(set(self.tokens))}
+        self.word2idx = {v: k for (k, v) in enumerate(set(self.tokens))}
         return self.word2idx
 
-    def fit_on_text(text: str):
-        pass
+    def fit_on_text(self) -> None:
+        assert len(self.tokens) > 0, "First create tokens"
+        print(self.tokens)
+        self.create_word2idx()
+        self.text = [self.word2idx[w] for w in self.tokens]
+        
 
 t = Tokenizer()
-tokens = t.word_tokenize("Hello man I am cool and cool and you")
+tokens = t.word_tokenize("Hello my name is Peter, how are You?")
 word2idx = t.create_word2idx()
-print(tokens)
+t.fit_on_text()
+t.fit_on_text()
 print("\n")
-print(word2idx) 
+print(word2idx)
+print(tokens)
+print("\n", t.text) 
