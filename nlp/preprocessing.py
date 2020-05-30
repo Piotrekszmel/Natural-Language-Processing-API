@@ -24,14 +24,21 @@ class Tokenizer:
         print(self.tokens)
         self.create_word2idx()
         self.text = [self.word2idx[w] for w in self.tokens]
+    
+    def create_idx2word(self) -> Dict:
+        assert len(self.word2idx) > 0, "First create word2idx"
+        self.idx2word = {v: k for (k, v) in self.word2idx.items()}
+        return self.idx2word
         
 
 t = Tokenizer()
 tokens = t.word_tokenize("Hello my name is Peter, how are You?")
 word2idx = t.create_word2idx()
+idx2word = t.create_idx2word()
 t.fit_on_text()
 t.fit_on_text()
 print("\n")
 print(word2idx)
 print(tokens)
-print("\n", t.text) 
+print("\n", t.text)
+print(idx2word)
