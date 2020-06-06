@@ -29,16 +29,10 @@ class Tokenizer:
         assert len(self.word2idx) > 0, "First create word2idx"
         self.idx2word = {v: k for (k, v) in self.word2idx.items()}
         return self.idx2word
-        
+    
+    def __repr__(self):
+        return (f"tokens: {self.tokens}")
 
 t = Tokenizer()
 tokens = t.word_tokenize("Hello my name is Peter, how are You?")
-word2idx = t.create_word2idx()
-idx2word = t.create_idx2word()
-t.fit_on_text()
-t.fit_on_text()
-print("\n")
-print(word2idx)
-print(tokens)
-print("\n", t.text)
-print(idx2word)
+print(t)
