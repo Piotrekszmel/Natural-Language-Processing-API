@@ -32,7 +32,3 @@ class Tokenizer:
     
     def __repr__(self):
         return (f"tokens: {self.tokens}")
-
-t = Tokenizer()
-tokens = t.word_tokenize("Hello my name is Peter, how are You?")
-print(t)
